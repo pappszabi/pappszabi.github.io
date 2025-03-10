@@ -1,1 +1,29 @@
-<h1>Ez az oldal</h1>
+<div id="statistics" class="page">
+    <h2> Statisztika</h2>
+    <div id="visualization"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+<script>
+// Statisztikák oldal betöltése
+async function loadStatistics() {
+    try {
+        const response = await fetch('visualization.json');
+        const spec = await response.json();
+        const container = document.getElementById('visualization');
+        await vegaEmbed(container, spec, { actions: true });
+    } catch (error) {
+        console.error('Hiba a statisztikák betöltésekor:', error);
+    }
+}
+
+// Statisztikák oldal megjelenítése
+function showPage(pageId) {
+    if (pageId === 'statistics') {
+        loadStatistics();
+    }
+}
+</script> 
